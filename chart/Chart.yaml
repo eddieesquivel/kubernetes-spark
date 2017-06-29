@@ -1,0 +1,10 @@
+name: spark
+version: 0.2.1.1
+description: Fast and general-purpose cluster computing system.
+home: http://spark.apache.org
+icon: http://spark.apache.org/images/spark-logo-trademark.png
+sources:
+  - https://github.com/eddieesquivel/kubernetes-spark 
+maintainers:
+  - name: Eddie Esquivel
+    email: eddie.esquivel@coreos.com 

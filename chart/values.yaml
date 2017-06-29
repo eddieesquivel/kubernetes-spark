@@ -1,0 +1,39 @@
+# Default values for spark.
+# This is a YAML-formatted file.
+# Declare name/value pairs to be passed into your templates.
+# name: value
+
+Master:
+  Name: master
+  Image: "quay.io/eddie_esquivel/spark-master"
+  ImageTag: "2.1.1-ha"
+  Replicas: 1
+  Component: "spark-master"
+  Cpu: "100m"
+  Memory: "512Mi"
+  ServicePort: 7077
+  ContainerPort: 7077
+  # Set Master JVM memory. Default 1g
+  #DaemonMemory: 1g
+
+WebUi:
+  Name: webui
+  ServicePort: 8080
+  ContainerPort: 8080
+  IngressClass: tectonic
+  DNS_Record: spark-ui.se.k8s.work
+
+Worker:
+  Name: worker
+  Image: "quay.io/eddie_esquivel/spark-worker"
+  ImageTag: "2.1.1-ha"
+  Replicas: 3
+  Component: "spark-worker"
+  Cpu: "100m"
+  Memory: "512Mi"
+  ContainerPort: 8081
+  # Set Worker JVM memory. Default 1g
+  #DaemonMemory: 1g
+  # Set how much total memory workers have to give executors
+  #ExecutorMemory: 1g
+
