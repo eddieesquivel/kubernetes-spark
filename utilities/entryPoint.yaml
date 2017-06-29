@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: edit-entry-point
+spec:
+  containers:
+  - name: edit-entry-point 
+    image: quay.io/eddie_esquivel/spark-master:2.1.1-ha 
+    command:
+    - "/bin/bash"
+    - "-c"
+    - "trap : TERM INT; sleep infinity & wait"
+    volumeMounts:
+    - mountPath: /opt/spark/conf
+      name: conf
+  volumes:
+    - name: conf
+      configMap:
+        name: eddie-chart-conf
+  restartPolicy: "OnFailure"
