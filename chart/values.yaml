@@ -11,8 +11,12 @@ Master:
   Component: "spark-master"
   Cpu: "100m"
   Memory: "512Mi"
+  ServicePortName: service
   ServicePort: 7077
-  ContainerPort: 7077
+  ServiceContainerPort: 7077
+  RestPortName: rest
+  RestPort: 6066
+  RestContainerPort: 6066
   # Set Master JVM memory. Default 1g
   #DaemonMemory: 1g
 
