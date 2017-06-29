@@ -9,8 +9,12 @@ metadata:
     component: "{{.Release.Name}}-{{.Values.Master.Component}}"
 spec:
   ports:
-    - port: {{.Values.Master.ServicePort}}
-      targetPort: {{.Values.Master.ContainerPort}}
+    - name: {{.Values.Master.ServicePortName}}
+      port: {{.Values.Master.ServicePort}}
+      targetPort: {{.Values.Master.ServiceContainerPort}}
+    - name: {{.Values.Master.RestPortName}}
+      port: {{.Values.Master.RestPort}}
+      targetPort: {{.Values.Master.RestContainerPort}}
   selector:
     component: "{{.Release.Name}}-{{.Values.Master.Component}}"
 ---
@@ -82,7 +86,8 @@ spec:
           command: ["/bin/sh","-c"]
           args: ["echo $(hostname -i) {{ template "master-fullname" . }} >> /etc/hosts; /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master --ip {{ template "master-fullname" . }} --port {{.Values.Master.ServicePort}} --webui-port {{.Values.WebUi.ContainerPort}}"]
           ports:
-            - containerPort: {{.Values.Master.ContainerPort}}
+            - containerPort: {{.Values.Master.ServiceContainerPort}}
+            - containerPort: {{.Values.Master.RestContainerPort}}
             - containerPort: {{.Values.WebUi.ContainerPort}}
           resources:
             requests:
