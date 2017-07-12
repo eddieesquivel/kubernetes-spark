@@ -6,7 +6,7 @@ push: push-spark
 # this tag and reset to v1. You should also double check the native
 # Hadoop libs at that point (we grab the 2.6.1 libs, which are
 # appropriate for 1.5.2-with-2.6).
-SPARK_TAG = 2.1.1-ha
+SPARK_TAG = 2.1.1
 
 spark-base:
 	docker build -t quay.io/eddie_esquivel/spark-base . -f Dockerfile.base
@@ -20,11 +20,7 @@ spark-worker: spark-base
 	docker build -t quay.io/eddie_esquivel/spark-worker . -f Dockerfile.worker
 	docker tag quay.io/eddie_esquivel/spark-worker quay.io/eddie_esquivel/spark-worker:$(SPARK_TAG)
 
-spark-master-ha: spark-base
-	docker build -t quay.io/eddie_esquivel/spark-master-ha . -f Dockerfile.master.ha
-	docker tag quay.io/eddie_esquivel/spark-master-ha quay.io/eddie_esquivel/spark-master-ha:$(SPARK_TAG)
-
-spark: spark-base spark-master spark-master-ha spark-worker
+spark: spark-base spark-master spark-worker
 
 push-spark-base: spark-base
 	docker push quay.io/eddie_esquivel/spark-base
@@ -34,20 +30,15 @@ push-spark-master: spark-master
 	docker push quay.io/eddie_esquivel/spark-master
 	docker push quay.io/eddie_esquivel/spark-master:$(SPARK_TAG)
 
-push-spark-master-ha: spark-master-ha
-	docker push quay.io/eddie_esquivel/spark-master-ha
-	docker push quay.io/eddie_esquivel/spark-master-ha:$(SPARK_TAG)
-
 push-spark-worker: spark-worker
 	docker push quay.io/eddie_esquivel/spark-worker
 	docker push quay.io/eddie_esquivel/spark-worker:$(SPARK_TAG)
 
-push-spark: push-spark-base push-spark-master push-spark-master-ha push-spark-worker
+push-spark: push-spark-base push-spark-master push-spark-worker
 
 clean:
 	docker rm -f $$(docker ps -aq) > /dev/null 2>&1 ;true
 	docker rmi -f $$(docker images -a | grep "^quay.io/eddie_esquivel/spark-master" | awk '{print $3}') > /dev/null 2>&1 ;true
-	docker rmi -f $$(docker images -a | grep "^quay.io/eddie_esquivel/spark-master-ha" | awk '{print $3}') > /dev/null 2>&1 ;true
 	docker rmi -f $$(docker images -a | grep "^quay.io/eddie_esquivel/spark-worker" | awk '{print $3}') > /dev/null 2>&1 ;true
 	docker rmi -f $$(docker images -a | grep "^quay.io/eddie_esquivel/spark-base" | awk '{print $3}') > /dev/null 2>&1 ;true
 	docker rmi -f $$(docker images -a | grep "^<none>" | awk '{print $3}') > /dev/null 2>&1 ;true
