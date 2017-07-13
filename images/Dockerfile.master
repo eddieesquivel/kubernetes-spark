@@ -1,2 +1,2 @@
-FROM quay.io/eddie_esquivel/spark-base:2.1.1-ha 
+FROM quay.io/eddie_esquivel/spark-base:2.2.0
 ENTRYPOINT ["/bin/bash", "-c", "./start-master"]

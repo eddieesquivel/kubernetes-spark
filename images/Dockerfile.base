@@ -45,9 +45,9 @@ RUN pip install boto && \
     update-java-alternatives -s java-1.8.0-openjdk-amd64
 
 ADD log4j.properties /opt/spark/conf/log4j.properties
-ADD start-common.sh start-worker start-master start-master-ha /
 ADD core-site.xml /opt/spark/conf/core-site.xml
 ADD spark-defaults.conf /opt/spark/conf/spark-defaults.conf
+ADD start-common.sh start-worker start-master /
 ENV PATH $PATH:/opt/spark/bin
 ENV DEBIAN_FRONTEND teletype
 ENV SPARK_HOME /opt/spark

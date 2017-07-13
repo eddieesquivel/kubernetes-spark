@@ -6,7 +6,7 @@ push: push-spark
 # this tag and reset to v1. You should also double check the native
 # Hadoop libs at that point (we grab the 2.6.1 libs, which are
 # appropriate for 1.5.2-with-2.6).
-SPARK_TAG = 2.1.1
+SPARK_TAG = 2.2.0
 
 spark-base:
 	docker build -t quay.io/eddie_esquivel/spark-base . -f Dockerfile.base
