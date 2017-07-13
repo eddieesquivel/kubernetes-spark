@@ -32,7 +32,7 @@ metadata:
     ingress.kubernetes.io/app-root: /
 spec:
   rules:
-    - host: {{.Values.WebUi.DNS_Record}} 
+    - host: {{ template "master-fullname" . }}.{{.Values.WebUi.Domain}} 
       http:
         paths:
           - path: /

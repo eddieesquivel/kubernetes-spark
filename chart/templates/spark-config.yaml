@@ -3,4 +3,9 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-conf
 data:
+  spark-defaults.conf: |
+    spark.master spark://{{ template "master-fullname" . }}:7077
+    spark.driver.extraLibraryPath /opt/hadoop/lib/native
+    spark.app.id {{ template "master-fullname" . }} 
+    spark.ui.reverseProxy true
 {{ (.Files.Glob "conf-files/*").AsConfig | indent 2 }}

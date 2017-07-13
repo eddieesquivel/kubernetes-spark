@@ -6,7 +6,7 @@
 Master:
   Name: master
   Image: "quay.io/eddie_esquivel/spark-master"
-  ImageTag: "2.1.1-ha"
+  ImageTag: "2.2.0"
   Replicas: 1
   Component: "spark-master"
   Cpu: "100m"
@@ -25,12 +25,12 @@ WebUi:
   ServicePort: 8080
   ContainerPort: 8080
   IngressClass: tectonic
-  DNS_Record: spark-ui.se.k8s.work
+  Domain: se.k8s.work
 
 Worker:
   Name: worker
   Image: "quay.io/eddie_esquivel/spark-worker"
-  ImageTag: "2.1.1-ha"
+  ImageTag: "2.2.0"
   Replicas: 3
   Component: "spark-worker"
   Cpu: "100m"
