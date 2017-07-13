@@ -29,7 +29,6 @@ metadata:
     component: "{{.Release.Name}}-{{.Values.Master.Component}}"
   annotations:
     kubernetes.io/ingress.class: {{.Values.WebUi.IngressClass | quote}}
-    ingress.kubernetes.io/app-root: /
 spec:
   rules:
     - host: {{ template "master-fullname" . }}.{{.Values.WebUi.Domain}} 
