@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: edit-entry-point 
-    image: quay.io/eddie_esquivel/spark-master:2.1.1-ha 
+    image: quay.io/eddie_esquivel/spark-master:2.2.0
     command:
     - "/bin/bash"
     - "-c"
@@ -16,5 +16,5 @@ spec:
   volumes:
     - name: conf
       configMap:
-        name: eddie-chart-conf
+        name: spark-cluster-conf
   restartPolicy: "OnFailure"
