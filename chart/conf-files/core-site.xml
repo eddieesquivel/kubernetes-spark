@@ -17,6 +17,6 @@
 <!-- Meant for HDFS running in K8s exposing port 8020 as a nodeport -->
 
 <configuration>
-	<property><name>fs.defaultFS</name><value>hdfs://10.0.103.51:8020</value></property>
+	<property><name>fs.defaultFS</name><value>hdfs://hdfs-namenode:8020</value></property>
 </configuration>
 
