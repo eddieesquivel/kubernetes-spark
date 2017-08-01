@@ -10,11 +10,11 @@ spec:
         spec:
           containers:
           - name: spark-job 
-            image: quay.io/eddie_esquivel/spark-master:2.1.1-ha 
+            image: quay.io/eddie_esquivel/spark-master:2.2.0
             command:
             - "/bin/bash"
             - "-c"
-            - "spark-submit --class org.apache.spark.examples.SparkPi  --master spark://eddie-chart-master:6066  --deploy-mode cluster  --supervise  --executor-memory 1G  --total-executor-cores 10  hdfs://10.0.103.51:8020/demo/spark-examples_2.11-2.1.1.jar  100"
+            - "spark-submit --class org.apache.spark.examples.SparkPi  --master spark://spark-cluster-master:6066  --deploy-mode cluster  --supervise  --executor-memory 1G  --total-executor-cores 10  hdfs://hdfs-namenode:8020/demo/spark-examples_2.11-2.1.1.jar  100"
             volumeMounts:
             - mountPath: /opt/spark/conf
               name: conf
